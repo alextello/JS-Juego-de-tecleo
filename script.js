@@ -2,7 +2,7 @@ const palabra = document.getElementById('palabra');
 const texto = document.getElementById('texto');
 const punteoEl = document.getElementById('punteo');
 const tiempoEl = document.getElementById('tiempo');
-const finjuegoEl = document.getElementById('fin-juego');
+const finjuegoEl = document.getElementById('fin-juego-container');
 const ajustesBtn = document.getElementById('ajustes-btn');
 const ajustes = document.getElementById('ajustes');
 const ajustesForm = document.getElementById('ajustes-form');
@@ -42,6 +42,12 @@ let punteo = 0;
 // Iniciar tiempo
 let tiempo = 10;
 
+// autofocus
+texto.focus();
+
+// empieza conteo regresivo
+const tiempoInterval = setInterval(actualizarTiempo, 1000);
+
 // Generar palabra aleatoria del arreglo
 function getPalabraRandom() {
     return palabras[Math.floor(Math.random() * palabras.length)];
@@ -58,6 +64,17 @@ function actualizarPunteo() {
     punteoEl.innerHTML = punteo;
 }
 
+// actualizar tiempo
+function actualizarTiempo() {
+    tiempo--;
+    tiempoEl.innerHTML = tiempo + 's';
+    if (tiempo === 0) {
+        clearInterval(tiempoInterval);
+        // Finalizar el juego
+        gameOver();
+    }
+}
+
 addPalabraDOM();
 
 //  event listeners
@@ -68,5 +85,19 @@ texto.addEventListener('input', e => {
         actualizarPunteo();
         // limpiar
         e.target.value = '';
+        tiempo += 3;
     }
 })
+
+// Finalizacion del juego
+
+function gameOver() {
+    finjuegoEl.innerHTML = `
+        <h1>El tiempo acabó</h1>
+        <p>Tu punteo final es: ${punteo}</p>
+        <button onclick="location.reload()">
+            Recargar
+        </button>
+    `;
+    finjuegoEl.style.display = 'flex';
+}
