@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<title>Juego de tecleo</title>
+	</head>
+	<body>
+		<button id="ajustes" class="ajustes-btn">
+			<i class="fas fa-cog"></i>
+		</button>
+		<div id="ajustes" class="ajustes">
+			<form id="ajustes-form">
+				<div>
+					<label for="dificultad">Dificultad</label>
+					<select id="dificultad">
+						<option value="facil">Fácil</option>
+						<option value="medio">Medio</option>
+						<option value="dificil">Difícil</option>
+					</select>
+				</div>
+			</form>
+		</div>
+		<div class="container">
+			<h2>👩‍💻 Teclea rápido</h2>
+			<small>Teclea lo siguiente: </small>
+			<h1 id="palabra"></h1>
+			<input
+				type="text"
+				id="texto"
+				autocomplete="off"
+				placeholder="Teclea la palabra aquí..."
+			/>
+
+			<p class="tiempo-container">Tiempo restante: <span id="tiempo">10s</span></p>
+			<p class="punteo-container">Punteo: <span id="punteo">0</span></p>
+			<div id="fin-juego-container" class="fin-juego-container"></div>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>
