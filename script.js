@@ -42,6 +42,12 @@ let punteo = 0;
 // Iniciar tiempo
 let tiempo = 10;
 
+// dificultad seleccionada
+let dificultad = localStorage.getItem('dificultad') ? localStorage.getItem('dificultad') : 'medio';
+
+// establecer dificutad al select
+dificultadSelect.value = dificultad;
+
 // autofocus
 texto.focus();
 
@@ -78,6 +84,8 @@ function actualizarTiempo() {
 addPalabraDOM();
 
 //  event listeners
+
+// tecleando
 texto.addEventListener('input', e => {
     const palabraInsertada = e.target.value;
     if (palabraInsertada === palabraRandom) {
@@ -85,7 +93,13 @@ texto.addEventListener('input', e => {
         actualizarPunteo();
         // limpiar
         e.target.value = '';
-        tiempo += 3;
+        if (dificultad === 'dificil') {
+            tiempo += 1;
+        } else if (dificultad === 'medio') {
+            tiempo += 2;
+        } else {
+            tiempo += 3;
+        }
     }
 })
 
@@ -101,3 +115,14 @@ function gameOver() {
     `;
     finjuegoEl.style.display = 'flex';
 }
+
+// ajustes
+ajustesBtn.addEventListener('click', () => {
+    ajustes.classList.toggle('hide');
+});
+
+// seleccion ajustes
+ajustesForm.addEventListener('change', (e) => {
+    dificultad = e.target.value;
+    localStorage.setItem('dificultad', dificultad);
+});
